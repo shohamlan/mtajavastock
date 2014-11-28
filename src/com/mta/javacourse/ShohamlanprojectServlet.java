@@ -29,6 +29,5 @@ public class ShohamlanprojectServlet extends HttpServlet {
 		
 		String resultStr = line1 + "<br>" + line2 + "<br>" +line3;
 		resp.getWriter().println(resultStr);
-
 	}
 }
