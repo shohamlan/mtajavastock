@@ -1,6 +1,6 @@
-package com.mta.javacourse;
+package com.mta.javacourse.model;
 
-public class stock {
+public class Stock {
 	private String symbol;
 	private float Ask;
 	private float Bid;
