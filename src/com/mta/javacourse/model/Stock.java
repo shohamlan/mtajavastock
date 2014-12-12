@@ -1,10 +1,36 @@
 package com.mta.javacourse.model;
 
+import java.util.Date;
+
 public class Stock {
 	private String symbol;
 	private float Ask;
 	private float Bid;
 	private java.util.Date Date;
+	
+	/**
+	 * copy constructor
+	 * @param stocks 
+	 */
+
+	public Stock(Stock stock){
+		this(stock.getSymbol(),stock.getAsk(),stock.getBid(),stock.getDate());
+	}
+
+	/**
+	 * constructor
+	 * @param stocks 
+	 */
+
+	public Stock(String stockSymbol1, float ask1, float bid1, Date date) {
+		if(stockSymbol1 != null)
+		{
+			setSymbol(stockSymbol1);
+			setAsk(ask1);
+			setBid(bid1);
+			setDate(date);
+		}
+	}
 	
 	public String getSymbol() {
 		return symbol;
