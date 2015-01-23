@@ -3,6 +3,7 @@ package com.mta.javacourse.model;
 import java.util.Date;
 
 public class Portfolio {
+	
 	private String title;
 	private final static int MAX_PORTFOLIO_SIZE = 5;
 	private StockStatus[] stocksStatus;

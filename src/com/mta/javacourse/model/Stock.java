@@ -2,6 +2,10 @@ package com.mta.javacourse.model;
 
 import java.util.Date;
 
+/*
+ * must change to protected because using extends in stockstatus
+ */
+
 public class Stock {
 	
 	protected String symbol;
@@ -17,6 +21,10 @@ public class Stock {
 	public Stock(Stock stock){
 		this(stock.getSymbol(),stock.getAsk(),stock.getBid(),new Date(stock.getDate().getTime()));
 	}
+	
+	/*
+	 * constructor 
+	 */
 	
 	public Stock(){
 		
@@ -42,7 +50,9 @@ public class Stock {
 		}
 	}
 	
-	
+	/*
+	 * getters & setters
+	 */
 	
 	public String getSymbol() {
 		return symbol;

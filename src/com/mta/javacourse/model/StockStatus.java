@@ -2,11 +2,18 @@ package com.mta.javacourse.model;
 
 import com.mta.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
 
+/*
+ * new class of stock status that extends stock. we  don't need to write here the stocks parameters 
+ */
+
 public class StockStatus extends Stock {
 	
 	private ALGO_RECOMMENDATION recommendation;
 	protected int stockQuantity;
 	
+	/*
+	 * 2 inner classes for StockStatus using super() for stock parameters
+	 */
 	public StockStatus(){
 		
 		super();
@@ -22,6 +29,10 @@ public class StockStatus extends Stock {
 		
 	}
 
+	/*
+	 * getters & setters of StockStatus parameters (not including stock parameters)
+	 */
+	
 	public ALGO_RECOMMENDATION getRecommendation() {
 		return recommendation;
 	}

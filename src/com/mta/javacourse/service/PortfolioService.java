@@ -6,6 +6,7 @@ import com.mta.javacourse.model.Stock;
 public class PortfolioService {
 	
 	public Portfolio getPortfolio(){
+		
 		Portfolio myPortfolio = new Portfolio();
 		java.util.Date currentDate= new java.util.Date();
 		
