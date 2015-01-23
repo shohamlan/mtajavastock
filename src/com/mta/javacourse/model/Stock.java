@@ -3,10 +3,11 @@ package com.mta.javacourse.model;
 import java.util.Date;
 
 public class Stock {
-	private String symbol;
-	private float Ask;
-	private float Bid;
-	private java.util.Date Date;
+	
+	protected String symbol;
+	protected float Ask;
+	protected float Bid;
+	protected java.util.Date Date;
 	
 	/**
 	 * copy constructor
@@ -14,7 +15,16 @@ public class Stock {
 	 */
 
 	public Stock(Stock stock){
-		this(stock.getSymbol(),stock.getAsk(),stock.getBid(),stock.getDate());
+		this(stock.getSymbol(),stock.getAsk(),stock.getBid(),new Date(stock.getDate().getTime()));
+	}
+	
+	public Stock(){
+		
+		symbol = "";
+		Ask = 0;
+		Bid = 0;
+		Date = new Date();
+		 
 	}
 
 	/**
@@ -31,6 +41,8 @@ public class Stock {
 			setDate(date);
 		}
 	}
+	
+	
 	
 	public String getSymbol() {
 		return symbol;
