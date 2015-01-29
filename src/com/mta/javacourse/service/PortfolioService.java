@@ -1,11 +1,18 @@
 package com.mta.javacourse.service;
 
+import com.mta.javacourse.exception.BalanceException;
+import com.mta.javacourse.exception.PortfolioFullException;
+import com.mta.javacourse.exception.StockAlreadyExistsException;
+import com.mta.javacourse.exception.StockNotExistException;
 import com.mta.javacourse.model.Portfolio;
 import com.mta.javacourse.model.Stock;
 
+/*
+ * PortfolioService is a propagator that propagates the exception to PortfolioServlet
+ */
 public class PortfolioService {
 	
-	public Portfolio getPortfolio(){
+	public Portfolio getPortfolio() throws StockAlreadyExistsException, PortfolioFullException, BalanceException, StockNotExistException{
 		
 		Portfolio myPortfolio = new Portfolio();
 		java.util.Date currentDate= new java.util.Date();
@@ -19,7 +26,11 @@ public class PortfolioService {
 		myPortfolio.addStock(stock1);
  		myPortfolio.addStock(stock2);
  		myPortfolio.addStock(stock3);
-	
+ 		/*
+ 		 * adding the same stock in order to get an exception
+ 		 */
+ 		myPortfolio.addStock(stock3);
+ 		
  		myPortfolio.buyStock("PIH",20);
 		myPortfolio.buyStock("AAL",30);
 		myPortfolio.buyStock("CAAS",40);

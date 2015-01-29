@@ -2,6 +2,11 @@ package com.mta.javacourse.model;
 
 import java.util.Date;
 
+import com.mta.javacourse.exception.BalanceException;
+import com.mta.javacourse.exception.PortfolioFullException;
+import com.mta.javacourse.exception.StockAlreadyExistsException;
+import com.mta.javacourse.exception.StockNotExistException;
+
 public class Portfolio {
 	
 	private String title;
@@ -113,20 +118,21 @@ public class Portfolio {
 		balance += amount;
 	}
 	
-	public void addStock(Stock stock){
+	public void addStock(Stock stock) throws StockAlreadyExistsException, PortfolioFullException{
 		int i = 0;
 		while(stocksStatus[i]!=null)
 		{
 			if(stock.getSymbol().equals(stocksStatus[i].getSymbol()))
 			{
 				System.out.println("You already own this kind of stock , no need to add the stock!");
-				return;
+				throw new StockAlreadyExistsException(stock.getSymbol());
 			}
 			i++;
 		}
 		if(portfolioSize >= MAX_PORTFOLIO_SIZE)
 		{
 			System.out.println(" Can't add new stock, portfolio can have only "+MAX_PORTFOLIO_SIZE+" stocks");
+			throw new PortfolioFullException();
 		}
 		else
 		{
@@ -150,7 +156,7 @@ public class Portfolio {
 	 * remove stock method. must take care about the item i delete
 	 */
 	
-	public boolean removeStock (String stockSymbol){
+	public void removeStock (String stockSymbol) throws StockNotExistException, PortfolioFullException, BalanceException{
 	
 		for(int i = 0; i<portfolioSize; i++){
 			
@@ -176,11 +182,10 @@ public class Portfolio {
 					this.portfolioSize--;
 				}
 				System.out.println("The stock "+stockSymbol+" was removed successfully");
-				return true;
 			}
 		}
 		System.out.println("The stock "+stockSymbol+" dosent exist in the portfolio");
-		return false;
+		throw new StockNotExistException (stockSymbol);
 	}
 	
 	/*
@@ -189,7 +194,7 @@ public class Portfolio {
 	 *  true=sold, false=impossible
 	 */
 	
-	public boolean sellStock(String symbol,int quantity){
+	public void sellStock(String symbol,int quantity) throws BalanceException{
 		
 		for(int i = 0; i<portfolioSize; i++){
 			
@@ -206,6 +211,7 @@ public class Portfolio {
 					else if(quantity > stocksStatus[i].getStockQuantity()){
 						
 						System.out.println("Not enough stocks to sell");
+						throw new BalanceException();
 				
 					}
 					
@@ -220,16 +226,19 @@ public class Portfolio {
 					else{      //quantity is lower then -1 
 					
 						System.out.println("Cant delete a negative number of quantity");
-						return false;
+						/*
+						 * there isn't a correct answer here, so i decide to enter as more similar as possible
+						 */
+						throw new BalanceException();
 					}
 					
-					return true;
+					
 					
 			}
 			
 		}
 		
-		return false;
+		
 		
 	}
 	
@@ -237,7 +246,7 @@ public class Portfolio {
 	 * buy stock
 	 */
 	
-	public boolean buyStock(String symbol, int quantity){
+	public void buyStock(String symbol, int quantity) throws BalanceException{
 		
 		for(int i = 0; i<portfolioSize; i++){
 		
@@ -269,22 +278,24 @@ public class Portfolio {
 					}
 
 					else
+					{
 						System.out.println("Not enough balance to complete purchase"); 
+						throw new BalanceException();
+					}
 
 				}
 				
 				else //lower then -1 
 				{
-					System.out.println("Cant delete a negative number of quantity");
-					return false;
+					System.out.println("Cant buy a negative number of quantity");
 				}
 				
-				return true;
+				
 			}
 			
 		}
 		
-		return false;
+		
 		
 	}
 		
