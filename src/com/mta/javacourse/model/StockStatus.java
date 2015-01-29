@@ -9,7 +9,7 @@ import com.mta.javacourse.model.Portfolio.ALGO_RECOMMENDATION;
 public class StockStatus extends Stock {
 	
 	private ALGO_RECOMMENDATION recommendation;
-	protected int stockQuantity;
+	private int stockQuantity;
 	
 	/*
 	 * 2 inner classes for StockStatus using super() for stock parameters
@@ -23,7 +23,7 @@ public class StockStatus extends Stock {
 
 	public StockStatus(StockStatus stockStatus){
 		
-		super();
+		super(stockStatus);
 		recommendation = stockStatus.getRecommendation();
 		stockQuantity = stockStatus.getStockQuantity();
 		

@@ -1,7 +1,6 @@
 package com.mta.javacourse.model;
 
 import java.util.Date;
-
 /*
  * must change to protected because using extends in stockstatus
  */
@@ -9,17 +8,21 @@ import java.util.Date;
 public class Stock {
 	
 	protected String symbol;
-	protected float Ask;
-	protected float Bid;
-	protected java.util.Date Date;
+	protected float ask;
+	protected float bid;
+	protected Date date;;
 	
 	/**
 	 * copy constructor
 	 * @param stocks 
 	 */
 
-	public Stock(Stock stock){
-		this(stock.getSymbol(),stock.getAsk(),stock.getBid(),new Date(stock.getDate().getTime()));
+	public Stock(Stock stock ) {
+		setSymbol(stock.getSymbol());
+		setAsk(stock.getAsk());
+		setBid(stock.getBid());
+		date = new Date();
+		setDate(new Date(stock.date.getTime()));
 	}
 	
 	/*
@@ -29,9 +32,9 @@ public class Stock {
 	public Stock(){
 		
 		symbol = "";
-		Ask = 0;
-		Bid = 0;
-		Date = new Date();
+		ask = 0;
+		bid = 0;
+		date = new Date();
 		 
 	}
 
@@ -61,25 +64,25 @@ public class Stock {
 		this.symbol = symbol;
 	}
 	public float getAsk() {
-		return Ask;
+		return ask;
 	}
 	public void setAsk(float ask) {
-		Ask = ask;
+		this.ask = ask;
 	}
 	public float getBid() {
-		return Bid;
+		return bid;
 	}
 	public void setBid(float bid) {
-		Bid = bid;
+		this.bid = bid;
 	}
-	public java.util.Date getDate() {
-		return Date;
+	public Date getDate() {
+		return date;
 	}
-	public void setDate(java.util.Date date) {
-		Date = date;
+	public void setDate(Date date) {
+		this.date = date;
 	}
 	public String getHtmlDescription(){
-		String stockDescription=" <b> Stock symbol </b> : " +getSymbol()+ " <b> ask </b> : " +getAsk()+ " <b> Bid </b> : " +getBid()+ " <b> date </b> : " +Date.getDate()+ "/" +Date.getMonth()+ "/" +Date.getYear(); 
+		String stockDescription=" <b> Stock symbol </b> : " +getSymbol()+ " <b> ask </b> : " +getAsk()+ " <b> Bid </b> : " +getBid()+ " <b> date </b> : " + getDate();
 		return stockDescription;
 	}
 	

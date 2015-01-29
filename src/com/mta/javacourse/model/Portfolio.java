@@ -46,7 +46,7 @@ public class Portfolio {
 		int i = 0;
 		while(stocksStatus[i] != null)
 		{
-			stocksValue += stocksStatus[i].Bid*stocksStatus[i].getStockQuantity();
+			stocksValue += stocksStatus[i].bid*stocksStatus[i].getStockQuantity();
 			i++;
 		}
 		return stocksValue;
@@ -132,11 +132,11 @@ public class Portfolio {
 		{
 			
 			StockStatus stockStatus = new StockStatus();
-			stockStatus.Ask = stock.getAsk();
-			stockStatus.Bid = stock.getBid();
-			stockStatus.symbol = stock.getSymbol();
+			stockStatus.setAsk(stock.getAsk());
+			stockStatus.setBid(stock.getBid());
+			stockStatus.setSymbol(stock.getSymbol());
 			stockStatus.setStockQuantity(0);
-			stockStatus.Date = new Date(stock.getDate().getTime());
+			stockStatus.date = new Date(stock.getDate().getTime());
 			stockStatus.setRecommendation(ALGO_RECOMMENDATION.DO_NOTHING);
 
 			this.stocksStatus[stockStatusSize] = stockStatus;
@@ -248,9 +248,11 @@ public class Portfolio {
 					
 					//float res = getBalance() /(stocksStatus[i].getCurrentAsk());
 					
-					quantity = (int)(getBalance() /(stocksStatus[i].getAsk()))
-							;
-					this.stocksStatus[i].stockQuantity +=  quantity;
+					quantity = (int)(getBalance() /(stocksStatus[i].getAsk()));
+					
+					int newQ = this.stocksStatus[i].getStockQuantity() + quantity;
+					this.stocksStatus[i].setStockQuantity(newQ);
+					
 					updateBalance(-(quantity * this.stocksStatus[i].getAsk()));
 					System.out.println(this.stocksStatus[i].getStockQuantity() + " Stocks of " +symbol+ " were bought"); 
 				}
